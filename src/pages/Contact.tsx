@@ -67,13 +67,16 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-32 pb-12 bg-[#0a1628]">
+      <section className="pt-32 pb-12 bg-secondary">
         <div className="container-width px-4 md:px-8">
           <div className="text-center animate-fade-up">
-            <h1 className="font-serif text-3xl md:text-4xl font-bold text-white mb-3">
+            <span className="inline-block px-4 py-2 bg-accent text-accent-foreground rounded-full text-sm font-medium mb-4">
+              Book Appointment
+            </span>
+            <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-3">
               Book Your Appointment
             </h1>
-            <p className="text-gray-400 text-base max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base max-w-2xl mx-auto">
               Schedule a consultation with Dr. Rakhee Das for expert dental care and treatment
             </p>
           </div>
@@ -81,40 +84,40 @@ const Contact = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-12 bg-[#0a1628]">
-        <div className="container-width px-4 md:px-8">
-          <div className="bg-[#0f2137] rounded-2xl border border-[#1e3a5f] overflow-hidden">
+      <section className="section-padding bg-background">
+        <div className="container-width">
+          <div className="dental-card rounded-2xl border border-border overflow-hidden">
             <div className="grid lg:grid-cols-2">
               {/* Left Column - Chamber Locations */}
-              <div className="p-8 border-r border-[#1e3a5f]">
+              <div className="p-8 border-r border-border bg-secondary/50">
                 {/* Chamber Locations */}
                 <div className="mb-8">
-                  <h2 className="text-xl font-semibold text-white mb-6">
+                  <h2 className="font-serif text-xl font-bold text-foreground mb-6">
                     Chamber Locations
                   </h2>
                   
                   {chambers.map((chamber, index) => (
                     <div
                       key={index}
-                      className="bg-[#162d4a] rounded-xl p-5 mb-4 border-l-4 border-primary"
+                      className="bg-card rounded-xl p-5 mb-4 border-l-4 border-primary shadow-sm"
                     >
                       <h3 className="text-primary font-semibold mb-3">
                         {chamber.name}
                       </h3>
                       <div className="space-y-2">
-                        <div className="flex items-start gap-3 text-gray-300">
-                          <MapPin className="w-4 h-4 mt-0.5 text-gray-400" />
+                        <div className="flex items-start gap-3 text-foreground">
+                          <MapPin className="w-4 h-4 mt-0.5 text-muted-foreground" />
                           <span className="text-sm">{chamber.address}</span>
                         </div>
-                        <div className="flex items-start gap-3 text-gray-300">
-                          <Clock className="w-4 h-4 mt-0.5 text-gray-400" />
+                        <div className="flex items-start gap-3 text-foreground">
+                          <Clock className="w-4 h-4 mt-0.5 text-muted-foreground" />
                           <span className="text-sm">
                             Visiting Hours:<br />
                             <strong>{chamber.hours}</strong>
                           </span>
                         </div>
-                        <div className="flex items-center gap-3 text-gray-300">
-                          <Phone className="w-4 h-4 text-gray-400" />
+                        <div className="flex items-center gap-3 text-foreground">
+                          <Phone className="w-4 h-4 text-muted-foreground" />
                           <span className="text-sm">{chamber.phone}</span>
                         </div>
                       </div>
@@ -123,38 +126,38 @@ const Contact = () => {
                 </div>
 
                 {/* Direct Contact Section */}
-                <div className="bg-[#162d4a] rounded-xl p-5">
+                <div className="bg-card rounded-xl p-5 shadow-sm">
                   <h3 className="text-primary font-semibold mb-4">
                     Direct Contact With Us
                   </h3>
                   <div className="space-y-4">
                     <div>
-                      <p className="text-gray-400 text-sm mb-1">Email us</p>
+                      <p className="text-muted-foreground text-sm mb-1">Email us</p>
                       <a 
                         href="mailto:rakheedas.dental@gmail.com" 
-                        className="flex items-center gap-2 text-gray-300 hover:text-primary transition-colors"
+                        className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
                       >
-                        <Mail className="w-4 h-4 text-gray-400" />
+                        <Mail className="w-4 h-4 text-muted-foreground" />
                         <span className="text-sm">rakheedas.dental@gmail.com</span>
                       </a>
                     </div>
                     <div>
-                      <p className="text-gray-400 text-sm mb-1">WhatsApp</p>
+                      <p className="text-muted-foreground text-sm mb-1">WhatsApp</p>
                       <button 
                         onClick={handleWhatsAppClick}
-                        className="flex items-center gap-2 text-gray-300 hover:text-green-400 transition-colors"
+                        className="flex items-center gap-2 text-foreground hover:text-green-600 transition-colors"
                       >
-                        <MessageCircle className="w-4 h-4 text-green-400" />
+                        <MessageCircle className="w-4 h-4 text-green-600" />
                         <span className="text-sm">+880 1815343430</span>
                       </button>
                     </div>
                     <div>
-                      <p className="text-gray-400 text-sm mb-1">Call us</p>
+                      <p className="text-muted-foreground text-sm mb-1">Call us</p>
                       <a 
                         href="tel:+8801815343430" 
-                        className="flex items-center gap-2 text-gray-300 hover:text-primary transition-colors"
+                        className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
                       >
-                        <Phone className="w-4 h-4 text-gray-400" />
+                        <Phone className="w-4 h-4 text-muted-foreground" />
                         <span className="text-sm">+880 1815343430</span>
                       </a>
                     </div>
@@ -163,15 +166,15 @@ const Contact = () => {
               </div>
 
               {/* Right Column - Appointment Form */}
-              <div className="p-8">
-                <h2 className="text-xl font-semibold text-white mb-6">
+              <div className="p-8 bg-card">
+                <h2 className="font-serif text-xl font-bold text-foreground mb-6">
                   Schedule Appointment
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Full Name <span className="text-red-400">*</span>
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                      Full Name <span className="text-destructive">*</span>
                     </label>
                     <Input
                       id="name"
@@ -181,13 +184,13 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="h-12 bg-[#1a3a5c] border-[#2a4a6c] text-white placeholder:text-gray-500"
+                      className="h-12"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                      Email Address <span className="text-red-400">*</span>
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      Email Address <span className="text-destructive">*</span>
                     </label>
                     <Input
                       id="email"
@@ -197,13 +200,13 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="h-12 bg-[#1a3a5c] border-[#2a4a6c] text-white placeholder:text-gray-500"
+                      className="h-12"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-                      Phone Number <span className="text-red-400">*</span>
+                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                      Phone Number <span className="text-destructive">*</span>
                     </label>
                     <Input
                       id="phone"
@@ -213,28 +216,27 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="h-12 bg-[#1a3a5c] border-[#2a4a6c] text-white placeholder:text-gray-500"
+                      className="h-12"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="chamber" className="block text-sm font-medium text-gray-300 mb-2">
-                      Preferred Chamber <span className="text-red-400">*</span>
+                    <label htmlFor="chamber" className="block text-sm font-medium text-foreground mb-2">
+                      Preferred Chamber <span className="text-destructive">*</span>
                     </label>
                     <Select
                       value={formData.chamber}
                       onValueChange={(value) => setFormData((prev) => ({ ...prev, chamber: value }))}
                       required
                     >
-                      <SelectTrigger className="h-12 bg-[#1a3a5c] border-[#2a4a6c] text-white">
+                      <SelectTrigger className="h-12">
                         <SelectValue placeholder="Select Chamber" />
                       </SelectTrigger>
-                      <SelectContent className="bg-[#1a3a5c] border-[#2a4a6c]">
+                      <SelectContent>
                         {chambers.map((chamber) => (
                           <SelectItem 
                             key={chamber.name} 
                             value={chamber.name}
-                            className="text-white hover:bg-[#2a4a6c]"
                           >
                             {chamber.name}
                           </SelectItem>
@@ -244,7 +246,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                       Message (Optional)
                     </label>
                     <Textarea
@@ -254,7 +256,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
-                      className="resize-none bg-[#1a3a5c] border-[#2a4a6c] text-white placeholder:text-gray-500"
+                      className="resize-none"
                     />
                   </div>
 
