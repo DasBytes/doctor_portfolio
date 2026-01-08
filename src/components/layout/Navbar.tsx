@@ -44,7 +44,7 @@ const Navbar = () => {
             <img
               src="/logo.png"
               alt="Dr. Rakhee Das Dental Hub"
-              className="w-40 h-50 object-cover"
+              className="w-20 h-20 object-cover"
             />
           </Link>
 

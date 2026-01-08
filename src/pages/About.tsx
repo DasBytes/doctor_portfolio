@@ -56,7 +56,7 @@ const About = () => {
               Dr. Rakhee Das
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              BDS | Dental Surgeon | Rajshahi Medical College Graduate
+              BDS | Dental Surgeon | 2019
             </p>
           </div>
         </div>

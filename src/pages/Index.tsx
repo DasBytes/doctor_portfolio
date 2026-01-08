@@ -59,7 +59,7 @@ const Index = () => {
                 Dentist | BDS
               </p>
               <p className="text-secondary/70 text-lg mb-8 max-w-xl">
-                Rajshahi Medical College Graduate | Providing Quality Dental Care in Chittagong with Compassion and Expertise
+                2019 | Providing Quality Dental Care in Chittagong with Compassion and Expertise
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button variant="hero" size="xl" asChild>
