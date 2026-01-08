@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -24,12 +24,6 @@ const Footer = () => {
             <div className="flex gap-4 mt-6">
               <a href="#" className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center hover:bg-primary transition-colors duration-200">
                 <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center hover:bg-primary transition-colors duration-200">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center hover:bg-primary transition-colors duration-200">
-                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -80,7 +74,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-secondary/70 text-sm">+880 1XXX-XXXXXX</span>
+                <span className="text-secondary/70 text-sm">+880 1815343430</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
@@ -89,7 +83,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <div className="text-secondary/70 text-sm">
-                  <p>Sat - Thu: 5:00 PM - 9:00 PM</p>
+                  <p>Sun-thu: 4:00 PM - 8:00 PM</p>
                   <p>Friday: Closed</p>
                 </div>
               </li>
