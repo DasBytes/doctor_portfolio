@@ -59,7 +59,7 @@ const Index = () => {
                 Dentist | BDS
               </p>
               <p className="text-secondary/70 text-lg mb-8 max-w-xl">
-                2019 | Providing Quality Dental Care in Chittagong with Compassion and Expertise
+                Providing Quality Dental Care in Chittagong with Compassion and Expertise
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button variant="hero" size="xl" asChild>
@@ -183,10 +183,6 @@ const Index = () => {
                   alt="Dr. Rakhee Das"
                   className="w-full max-w-md rounded-2xl shadow-dental-lg mx-auto lg:mx-0"
                 />
-                <div className="absolute -bottom-4 -right-4 md:bottom-auto md:-right-6 md:top-1/2 md:-translate-y-1/2 bg-primary text-primary-foreground p-4 md:p-6 rounded-xl shadow-lg">
-                  <p className="font-serif text-2xl md:text-3xl font-bold">2019</p>
-                  <p className="text-sm md:text-base opacity-90">Graduate</p>
-                </div>
               </div>
             </div>
 
