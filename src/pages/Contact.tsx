@@ -144,15 +144,17 @@ const Contact = () => {
                   </h3>
                   <div className="rounded-xl overflow-hidden border border-border h-48">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.5!2d91.83!3d22.36!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acd89a6cfce5b7%3A0x3f8!2sCheragi%20Pahar%2C%20Chittagong!5e0!3m2!1sen!2sbd!4v1700000000000"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Chamber Location"
-                    />
+  src="https://www.google.com/maps?q=Cheragi+Pahar+Moore,+Chattogram,+Bangladesh&output=embed"
+  width="100%"
+  height="100%"
+  style={{ border: 0 }}
+  allowFullScreen
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+  title="Dental Chamber Location - Cheragi Pahar Moore, Chattogram"
+/>
+
+                    
                   </div>
                 </div>
 
