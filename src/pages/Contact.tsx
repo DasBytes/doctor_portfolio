@@ -17,8 +17,10 @@ const chambers = [
   {
     name: "Cheragi Pahar Square",
     address: "Cheragi Pahar, Chittagong",
-    hours: "4 PM - 8 PM (Thursday Closed)",
+    hours: "4 PM - 8 PM",
+    days: "Sunday, Tuesday, Wednesday",
     phone: "01815343430",
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.123456789!2d91.8!3d22.35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDIxJzAwLjAiTiA5McKwNDgnMDAuMCJF!5e0!3m2!1sen!2sbd!4v1234567890",
   },
 ];
 
@@ -112,8 +114,8 @@ const Contact = () => {
                         <div className="flex items-start gap-3 text-foreground">
                           <Clock className="w-4 h-4 mt-0.5 text-muted-foreground" />
                           <span className="text-sm">
-                            Visiting Hours:<br />
-                            <strong>{chamber.hours}</strong>
+                            Visiting Hours: <strong>{chamber.hours}</strong><br />
+                            <span className="text-muted-foreground">({chamber.days})</span>
                           </span>
                         </div>
                         <div className="flex items-center gap-3 text-foreground">
@@ -125,42 +127,55 @@ const Contact = () => {
                   ))}
                 </div>
 
-                {/* Direct Contact Section */}
-                <div className="bg-card rounded-xl p-5 shadow-sm">
+                {/* WhatsApp Button */}
+                <Button
+                  onClick={handleWhatsAppClick}
+                  variant="outline"
+                  className="w-full h-12 border-2 border-green-500 text-green-600 hover:bg-green-50 hover:text-green-700 font-medium gap-2 mb-8"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  01815343430
+                </Button>
+
+                {/* Map Section */}
+                <div>
                   <h3 className="text-primary font-semibold mb-4">
-                    Direct Contact With Us
+                    Find Us
                   </h3>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-muted-foreground text-sm mb-1">Email us</p>
-                      <a 
-                        href="mailto:rakheedas.dental@gmail.com" 
-                        className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-                      >
-                        <Mail className="w-4 h-4 text-muted-foreground" />
-                        <span className="text-sm">rakheedas.dental@gmail.com</span>
-                      </a>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm mb-1">WhatsApp</p>
-                      <button 
-                        onClick={handleWhatsAppClick}
-                        className="flex items-center gap-2 text-foreground hover:text-green-600 transition-colors"
-                      >
-                        <MessageCircle className="w-4 h-4 text-green-600" />
-                        <span className="text-sm">+880 1815343430</span>
-                      </button>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm mb-1">Call us</p>
-                      <a 
-                        href="tel:+8801815343430" 
-                        className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-                      >
-                        <Phone className="w-4 h-4 text-muted-foreground" />
-                        <span className="text-sm">+880 1815343430</span>
-                      </a>
-                    </div>
+                  <div className="rounded-xl overflow-hidden border border-border h-48">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.5!2d91.83!3d22.36!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acd89a6cfce5b7%3A0x3f8!2sCheragi%20Pahar%2C%20Chittagong!5e0!3m2!1sen!2sbd!4v1700000000000"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Chamber Location"
+                    />
+                  </div>
+                </div>
+
+                {/* Direct Contact Section */}
+                <div className="mt-6 bg-card rounded-xl p-5 shadow-sm">
+                  <h3 className="text-primary font-semibold mb-4">
+                    Direct Contact
+                  </h3>
+                  <div className="space-y-3">
+                    <a 
+                      href="mailto:rakheedas.dental@gmail.com" 
+                      className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+                    >
+                      <Mail className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-sm">rakheedas.dental@gmail.com</span>
+                    </a>
+                    <a 
+                      href="tel:+8801815343430" 
+                      className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+                    >
+                      <Phone className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-sm">+880 1815343430</span>
+                    </a>
                   </div>
                 </div>
               </div>
