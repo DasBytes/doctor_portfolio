@@ -52,9 +52,6 @@ const Index = () => {
         <div className="container-width px-4 md:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-up">
-              <span className="inline-block px-4 py-2 bg-primary/20 text-primary-foreground rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-                Welcome to My Practice
-              </span>
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-secondary leading-tight mb-6">
                 Dr. Rakhee Das
               </h1>
