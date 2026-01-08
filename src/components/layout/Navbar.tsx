@@ -40,24 +40,12 @@ const Navbar = () => {
       <div className="container-width px-4 md:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-serif font-bold text-lg">R</span>
-            </div>
-            <div className="hidden sm:block">
-              <p className={cn(
-                "font-serif font-semibold text-lg transition-colors",
-                isScrolled ? "text-foreground" : "text-foreground"
-              )}>
-                Dr. Rakhee Das
-              </p>
-              <p className={cn(
-                "text-xs transition-colors",
-                isScrolled ? "text-muted-foreground" : "text-muted-foreground"
-              )}>
-                BDS, Dental Surgeon
-              </p>
-            </div>
+          <Link to="/">
+            <img
+              src="/logo.png"
+              alt="Dr. Rakhee Das Dental Hub"
+              className="w-12 h-12 object-cover"
+            />
           </Link>
 
           {/* Desktop Navigation */}
