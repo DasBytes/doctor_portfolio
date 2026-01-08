@@ -1,31 +1,24 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ChevronRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import Layout from "@/components/layout/Layout";
 import { useToast } from "@/hooks/use-toast";
 
-const contactInfo = [
+const chambers = [
   {
-    icon: MapPin,
-    title: "Chamber Address",
-    details: ["Jamalkhan", "Chittagong, Bangladesh"],
-  },
-  {
-    icon: Phone,
-    title: "Phone Number",
-    details: ["+880 1XXX-XXXXXX"],
-  },
-  {
-    icon: Mail,
-    title: "Email Address",
-    details: ["contact@drakheedas.com"],
-  },
-  {
-    icon: Clock,
-    title: "Chamber Hours",
-    details: ["Sat - Thu: 5:00 PM - 9:00 PM", "Friday: Closed"],
+    name: "Cheragi Pahar Square",
+    address: "Cheragi Pahar, Chittagong",
+    hours: "4 PM - 8 PM (Thursday Closed)",
+    phone: "01815343430",
   },
 ];
 
@@ -36,6 +29,7 @@ const Contact = () => {
     name: "",
     email: "",
     phone: "",
+    chamber: "",
     message: "",
   });
 
@@ -47,11 +41,11 @@ const Contact = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     toast({
-      title: "Message Sent!",
-      description: "Thank you for your message. We'll get back to you soon.",
+      title: "Appointment Request Sent!",
+      description: "We'll contact you shortly to confirm your appointment.",
     });
 
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    setFormData({ name: "", email: "", phone: "", chamber: "", message: "" });
     setIsSubmitting(false);
   };
 
@@ -64,102 +58,203 @@ const Contact = () => {
     }));
   };
 
+  const handleWhatsAppClick = () => {
+    const whatsappNumber = "8801815343430";
+    const message = encodeURIComponent("Hello, I would like to book an appointment with Dr. Rakhee Das.");
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-secondary">
+      <section className="pt-32 pb-12 bg-[#0a1628]">
         <div className="container-width px-4 md:px-8">
           <div className="text-center animate-fade-up">
-            <span className="inline-block px-4 py-2 bg-accent text-accent-foreground rounded-full text-sm font-medium mb-4">
-              Contact Us
-            </span>
-            <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Get in Touch
+            <h1 className="font-serif text-3xl md:text-4xl font-bold text-white mb-3">
+              Book Your Appointment
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Have questions or ready to schedule an appointment? We're here to help. 
-              Reach out to us through any of the methods below.
+            <p className="text-gray-400 text-base max-w-2xl mx-auto">
+              Schedule a consultation with Dr. Rakhee Das for expert dental care and treatment
             </p>
           </div>
         </div>
       </section>
 
-      {/* Contact Content */}
-      <section className="section-padding bg-background">
-        <div className="container-width">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="animate-fade-up">
-              <div className="dental-card p-8 rounded-xl">
-                <h2 className="font-serif text-2xl font-bold text-foreground mb-2">
-                  Send a Message
+      {/* Main Content */}
+      <section className="py-12 bg-[#0a1628]">
+        <div className="container-width px-4 md:px-8">
+          <div className="bg-[#0f2137] rounded-2xl border border-[#1e3a5f] overflow-hidden">
+            <div className="grid lg:grid-cols-2">
+              {/* Left Column - Chamber Locations */}
+              <div className="p-8 border-r border-[#1e3a5f]">
+                {/* Chamber Locations */}
+                <div className="mb-8">
+                  <h2 className="text-xl font-semibold text-white mb-6">
+                    Chamber Locations
+                  </h2>
+                  
+                  {chambers.map((chamber, index) => (
+                    <div
+                      key={index}
+                      className="bg-[#162d4a] rounded-xl p-5 mb-4 border-l-4 border-primary"
+                    >
+                      <h3 className="text-primary font-semibold mb-3">
+                        {chamber.name}
+                      </h3>
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-3 text-gray-300">
+                          <MapPin className="w-4 h-4 mt-0.5 text-gray-400" />
+                          <span className="text-sm">{chamber.address}</span>
+                        </div>
+                        <div className="flex items-start gap-3 text-gray-300">
+                          <Clock className="w-4 h-4 mt-0.5 text-gray-400" />
+                          <span className="text-sm">
+                            Visiting Hours:<br />
+                            <strong>{chamber.hours}</strong>
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3 text-gray-300">
+                          <Phone className="w-4 h-4 text-gray-400" />
+                          <span className="text-sm">{chamber.phone}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Direct Contact Section */}
+                <div className="bg-[#162d4a] rounded-xl p-5">
+                  <h3 className="text-primary font-semibold mb-4">
+                    Direct Contact With Us
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-gray-400 text-sm mb-1">Email us</p>
+                      <a 
+                        href="mailto:rakheedas.dental@gmail.com" 
+                        className="flex items-center gap-2 text-gray-300 hover:text-primary transition-colors"
+                      >
+                        <Mail className="w-4 h-4 text-gray-400" />
+                        <span className="text-sm">rakheedas.dental@gmail.com</span>
+                      </a>
+                    </div>
+                    <div>
+                      <p className="text-gray-400 text-sm mb-1">WhatsApp</p>
+                      <button 
+                        onClick={handleWhatsAppClick}
+                        className="flex items-center gap-2 text-gray-300 hover:text-green-400 transition-colors"
+                      >
+                        <MessageCircle className="w-4 h-4 text-green-400" />
+                        <span className="text-sm">+880 1815343430</span>
+                      </button>
+                    </div>
+                    <div>
+                      <p className="text-gray-400 text-sm mb-1">Call us</p>
+                      <a 
+                        href="tel:+8801815343430" 
+                        className="flex items-center gap-2 text-gray-300 hover:text-primary transition-colors"
+                      >
+                        <Phone className="w-4 h-4 text-gray-400" />
+                        <span className="text-sm">+880 1815343430</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column - Appointment Form */}
+              <div className="p-8">
+                <h2 className="text-xl font-semibold text-white mb-6">
+                  Schedule Appointment
                 </h2>
-                <p className="text-muted-foreground text-sm mb-6">
-                  Fill out the form below and we'll get back to you as soon as possible.
-                </p>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                      Full Name *
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                      Full Name <span className="text-red-400">*</span>
                     </label>
                     <Input
                       id="name"
                       name="name"
                       type="text"
-                      placeholder="Enter your full name"
+                      placeholder="Full Name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="h-12"
+                      className="h-12 bg-[#1a3a5c] border-[#2a4a6c] text-white placeholder:text-gray-500"
                     />
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                        Email Address *
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="h-12"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                        Phone Number
-                      </label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        placeholder="+880 1XXX-XXXXXX"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="h-12"
-                      />
-                    </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                      Email Address <span className="text-red-400">*</span>
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="example@gmail.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="h-12 bg-[#1a3a5c] border-[#2a4a6c] text-white placeholder:text-gray-500"
+                    />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                      Message *
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                      Phone Number <span className="text-red-400">*</span>
+                    </label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="Mobile Number"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="h-12 bg-[#1a3a5c] border-[#2a4a6c] text-white placeholder:text-gray-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="chamber" className="block text-sm font-medium text-gray-300 mb-2">
+                      Preferred Chamber <span className="text-red-400">*</span>
+                    </label>
+                    <Select
+                      value={formData.chamber}
+                      onValueChange={(value) => setFormData((prev) => ({ ...prev, chamber: value }))}
+                      required
+                    >
+                      <SelectTrigger className="h-12 bg-[#1a3a5c] border-[#2a4a6c] text-white">
+                        <SelectValue placeholder="Select Chamber" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#1a3a5c] border-[#2a4a6c]">
+                        {chambers.map((chamber) => (
+                          <SelectItem 
+                            key={chamber.name} 
+                            value={chamber.name}
+                            className="text-white hover:bg-[#2a4a6c]"
+                          >
+                            {chamber.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                      Message (Optional)
                     </label>
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="How can we help you? Describe your dental concern or inquiry..."
+                      placeholder="Any specific concerns or preferred appointment time..."
                       value={formData.message}
                       onChange={handleChange}
-                      required
-                      rows={5}
-                      className="resize-none"
+                      rows={4}
+                      className="resize-none bg-[#1a3a5c] border-[#2a4a6c] text-white placeholder:text-gray-500"
                     />
                   </div>
 
@@ -167,7 +262,7 @@ const Contact = () => {
                     type="submit" 
                     variant="appointment" 
                     size="lg" 
-                    className="w-full"
+                    className="w-full h-12"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -177,93 +272,26 @@ const Contact = () => {
                       </>
                     ) : (
                       <>
-                        <Send className="w-5 h-5" />
-                        Send Message
+                        Book Appointment
+                        <ChevronRight className="w-5 h-5" />
                       </>
                     )}
                   </Button>
                 </form>
               </div>
             </div>
-
-            {/* Contact Info & Map */}
-            <div className="space-y-8 animate-fade-up delay-200">
-              {/* Contact Info Cards */}
-              <div className="grid sm:grid-cols-2 gap-4">
-                {contactInfo.map((info) => (
-                  <div
-                    key={info.title}
-                    className="dental-card p-6 rounded-xl"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center mb-4">
-                      <info.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground mb-2">{info.title}</h3>
-                    {info.details.map((detail, idx) => (
-                      <p key={idx} className="text-muted-foreground text-sm">
-                        {detail}
-                      </p>
-                    ))}
-                  </div>
-                ))}
-              </div>
-
-              {/* Map */}
-              <div className="dental-card rounded-xl overflow-hidden h-80">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3689.832775!2d91.8219!3d22.3569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acd89aaa8239cd%3A0x6e65fa00001f0!2sJamalkhan%2C%20Chittagong!5e0!3m2!1sen!2sbd!4v1"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Chamber Location"
-                />
-              </div>
-
-              {/* Quick Info */}
-              <div className="dental-card p-6 rounded-xl bg-accent">
-                <div className="flex items-start gap-4">
-                  <CheckCircle className="w-6 h-6 text-primary shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">
-                      Walk-ins Welcome
-                    </h4>
-                    <p className="text-muted-foreground text-sm">
-                      While appointments are preferred, we do accept walk-in patients during 
-                      chamber hours. For emergencies, please call ahead.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="dental-gradient section-padding">
-        <div className="container-width text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary-foreground mb-4 animate-fade-up">
-            Prefer to Call?
-          </h2>
-          <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto animate-fade-up delay-100">
-            Speak directly with us to schedule your appointment or ask any questions.
-          </p>
-          <Button 
-            variant="heroOutline" 
-            size="xl" 
-            className="animate-fade-up delay-200"
-            asChild
-          >
-            <a href="tel:+8801XXXXXXXXX">
-              <Phone className="w-5 h-5" />
-              Call Now
-            </a>
-          </Button>
-        </div>
-      </section>
+      {/* Floating WhatsApp Button */}
+      <button
+        onClick={handleWhatsAppClick}
+        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+        aria-label="Chat on WhatsApp"
+      >
+        <MessageCircle className="w-6 h-6" />
+      </button>
     </Layout>
   );
 };
