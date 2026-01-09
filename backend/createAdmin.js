@@ -13,8 +13,8 @@ const pool = mysql.createPool({
   connectionLimit: 10,
 });
 
-const email = "admin@clinic.com";   // set your admin email
-const password = "admin123";        // set your desired password
+const email = "admin@clinic.com";  
+const password = "admin123";       
 
 const createAdmin = async () => {
   const hashed = await bcrypt.hash(password, 10);
