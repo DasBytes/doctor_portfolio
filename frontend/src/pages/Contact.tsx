@@ -1,4 +1,6 @@
 import { useState } from "react";
+import React from 'react';
+import { Calendar } from 'lucide-react'; 
 import { Phone, Mail, MapPin, Clock, ChevronRight } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
@@ -30,13 +32,16 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    gender: "",
     email: "",
     phone: "",
     chamber: "",
+    appointmentDate: "",
+    dob: "",
+    appointmentTime: "",
     message: "",
   });
 
-  // Handle form changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -46,9 +51,9 @@ const Contact = () => {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!formData.chamber) {
       toast({ title: "Please select a chamber" });
       return;
@@ -71,7 +76,17 @@ const Contact = () => {
           "We'll contact you shortly to confirm your appointment.",
       });
 
-      setFormData({ name: "", email: "", phone: "", chamber: "", message: "" });
+      setFormData({
+        name: "",
+        gender: "",
+        email: "",
+        phone: "",
+        chamber: "",
+        appointmentDate: "",
+        dob: "",
+        appointmentTime: "",
+        message: "",
+      });
     } catch (err) {
       toast({
         title: "Error",
@@ -82,7 +97,6 @@ const Contact = () => {
     setIsSubmitting(false);
   };
 
-  // Handle WhatsApp click
   const handleWhatsAppClick = () => {
     const whatsappNumber = "8801815343430";
     const message = encodeURIComponent(
@@ -93,7 +107,6 @@ const Contact = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
       <section className="pt-32 pb-12 bg-secondary">
         <div className="container-width px-4 md:px-8 text-center">
           <span className="inline-block px-4 py-2 bg-accent text-accent-foreground rounded-full text-sm font-medium mb-4">
@@ -108,11 +121,10 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Main Content */}
       <section className="section-padding bg-background">
         <div className="container-width">
           <div className="grid lg:grid-cols-2 rounded-2xl border overflow-hidden">
-            {/* Left */}
+            {/* LEFT */}
             <div className="p-8 bg-secondary/50 border-r">
               <h2 className="font-serif text-xl font-bold mb-6">
                 Chamber Locations
@@ -144,7 +156,6 @@ const Contact = () => {
                 </div>
               ))}
 
-              {/* WhatsApp Button */}
               <Button
                 onClick={handleWhatsAppClick}
                 variant="outline"
@@ -154,7 +165,6 @@ const Contact = () => {
                 01815343430
               </Button>
 
-              {/* Map */}
               <div className="h-48 rounded-xl overflow-hidden border">
                 <iframe
                   src="https://www.google.com/maps?q=Cheragi+Pahar+Moore,+Chattogram,+Bangladesh&output=embed"
@@ -166,7 +176,6 @@ const Contact = () => {
                 />
               </div>
 
-              {/* Direct Contact */}
               <div className="mt-6 bg-card p-5 rounded-xl">
                 <a
                   href="mailto:rakheedas.dental@gmail.com"
@@ -182,7 +191,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Right */}
+            {/* RIGHT FORM */}
             <div className="p-8 bg-card">
               <h2 className="font-serif text-xl font-bold mb-6">
                 Schedule Appointment
@@ -191,11 +200,28 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <Input
                   name="name"
-                  placeholder="Full Name"
+                  placeholder="Patient Name"
                   required
                   onChange={handleChange}
                   value={formData.name}
                 />
+
+                <Select
+                  value={formData.gender}
+                  onValueChange={(value) =>
+                    setFormData((p) => ({ ...p, gender: value }))
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Gender" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Male">Male</SelectItem>
+                    <SelectItem value="Female">Female</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+
                 <Input
                   name="email"
                   type="email"
@@ -204,13 +230,112 @@ const Contact = () => {
                   onChange={handleChange}
                   value={formData.email}
                 />
+
                 <Input
                   name="phone"
-                  placeholder="Phone Number"
+                  placeholder="Contact Number"
                   required
                   onChange={handleChange}
                   value={formData.phone}
                 />
+
+
+               {/* Date of Birth */}
+<div className="mt-4">
+  <div className="relative w-full">
+    {/* The Native Input */}
+    <input
+      id="dob"
+      name="dob"
+      type="date"
+      value={formData.dob}
+      onChange={handleChange}
+      className="w-full px-4 py-3 text-slate-600 border border-slate-200 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white"
+    />
+    
+    {/* The Custom Info Text: Only visible when no date is selected */}
+    {!formData.dob && (
+      <label 
+        htmlFor="dob" 
+        className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none bg-white pr-2"
+      >
+        Date of Birth
+      </label>
+    )}
+  </div>
+</div>
+
+{/* Appointment Date */}
+<div className="mt-4">
+  <div className="relative w-full">
+    <input
+      id="appointmentDate"
+      name="appointmentDate"
+      type="date"
+      value={formData.appointmentDate}
+      onChange={(e) => {
+        const val = e.target.value;
+        if (!val) return setFormData((p) => ({ ...p, appointmentDate: "" }));
+
+        // Validation for Sun, Tue, Thu
+        const [year, month, day] = val.split('-').map(Number);
+        const selectedDate = new Date(year, month - 1, day);
+        const dayOfWeek = selectedDate.getDay();
+
+        if (![0, 2, 4].includes(dayOfWeek)) {
+          toast({
+            title: "Invalid Date",
+            variant: "destructive",
+            description: "Appointments available on Sun, Tue, and Thu.",
+          });
+          setFormData((p) => ({ ...p, appointmentDate: "" }));
+          return;
+        }
+        setFormData((p) => ({ ...p, appointmentDate: val }));
+      }}
+      className="w-full px-4 py-3 text-slate-600 border border-slate-200 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white"
+    />
+
+    {/* The Custom Info Text: Only visible when no date is selected */}
+    {!formData.appointmentDate && (
+      <label 
+        htmlFor="appointmentDate" 
+        className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none bg-white pr-2"
+      >
+        Appointment Date
+      </label>
+    )}
+  </div>
+</div>
+
+
+                <Select
+                  value={formData.appointmentTime}
+                  onValueChange={(value) =>
+                    setFormData((p) => ({ ...p, appointmentTime: value }))
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Appointment Time" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {[
+                      "4:30 PM",
+                      "5:00 PM",
+                      "5:30 PM",
+                      "6:00 PM",
+                      "6:30 PM",
+                      "7:00 PM",
+                      "7:30 PM",
+                      "8:00 PM",
+                      "8:30 PM",
+                    ].map((time) => (
+                      <SelectItem key={time} value={time}>
+                        {time}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
 
                 <Select
                   value={formData.chamber}
@@ -252,7 +377,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Floating WhatsApp */}
       <button
         onClick={handleWhatsAppClick}
         className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg"
