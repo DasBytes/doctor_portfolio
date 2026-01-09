@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { getAppointments, updateAppointment } from "../api/api";
 import { toast, ToastContainer } from "react-toastify";
-import { Calendar, Mail, Phone, MapPin, MessageSquare, Clock, CheckCircle, XCircle, Search, Filter, LogOut } from "lucide-react";
+import { Calendar, Mail, Phone, MapPin, MessageSquare, Clock, CheckCircle, XCircle, Search, Filter, LogOut, User } from "lucide-react";
 
 interface Appointment {
   id: number;
   name: string;
+  gender: string;
+  dob: string;
+  appointment_date: string;
+  appointment_time: string;
   email: string;
   phone: string;
   chamber: string;
@@ -35,18 +39,17 @@ export default function AdminDashboard() {
     fetchAppointments();
   };
 
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  toast.success("Logged out successfully");
-  // Redirect to admin login page
-  window.location.href = "/admin"; // <-- updated
-};
-
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    toast.success("Logged out successfully");
+    window.location.href = "/admin";
+  };
 
   const filteredAppointments = appointments.filter(appt => {
-    const matchesSearch = appt.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         appt.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         appt.phone.includes(searchTerm);
+    const matchesSearch =
+      appt.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      appt.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      appt.phone.includes(searchTerm);
     const matchesFilter = filterStatus === "all" || appt.status === filterStatus;
     return matchesSearch && matchesFilter;
   });
@@ -74,6 +77,14 @@ const handleLogout = () => {
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
+    });
+  };
+
+  const formatSimpleDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
     });
   };
 
@@ -203,24 +214,44 @@ const handleLogout = () => {
                             </div>
                           </div>
                         </div>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          <div className="flex items-center gap-2 text-slate-600">
+
+                        {/* New info rows: gender, DOB, appointment date/time */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-600">
+                          <div className="flex items-center gap-2">
+                            <User size={16} className="text-slate-400" />
+                            <span className="text-sm">{appt.gender}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Calendar size={16} className="text-slate-400" />
+                            <span className="text-sm">{formatSimpleDate(appt.dob)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Calendar size={16} className="text-slate-400" />
+                            <span className="text-sm">{formatSimpleDate(appt.appointment_date)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock size={16} className="text-slate-400" />
+                            <span className="text-sm">{appt.appointment_time}</span>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                          <div className="flex items-center gap-2">
                             <Mail size={16} className="text-slate-400" />
                             <span className="text-sm">{appt.email}</span>
                           </div>
-                          <div className="flex items-center gap-2 text-slate-600">
+                          <div className="flex items-center gap-2">
                             <Phone size={16} className="text-slate-400" />
                             <span className="text-sm">{appt.phone}</span>
                           </div>
-                          <div className="flex items-center gap-2 text-slate-600">
+                          <div className="flex items-center gap-2">
                             <MapPin size={16} className="text-slate-400" />
                             <span className="text-sm">{appt.chamber}</span>
                           </div>
                         </div>
 
                         {appt.message && (
-                          <div className="flex items-start gap-2 text-slate-600 bg-slate-50 p-3 rounded-lg">
+                          <div className="flex items-start gap-2 text-slate-600 bg-slate-50 p-3 rounded-lg mt-3">
                             <MessageSquare size={16} className="text-slate-400 mt-0.5 flex-shrink-0" />
                             <span className="text-sm">{appt.message}</span>
                           </div>
@@ -228,7 +259,7 @@ const handleLogout = () => {
                       </div>
 
                       {appt.status === "pending" && (
-                        <div className="flex gap-3 lg:flex-col">
+                        <div className="flex gap-3 lg:flex-col mt-4 lg:mt-0">
                           <button
                             onClick={() => handleStatus(appt.id, "confirmed")}
                             className="flex-1 lg:flex-none bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 shadow-sm"
