@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -10,7 +12,7 @@ const transporter = nodemailer.createTransport({
 
 export default async function sendMail(to, subject, text) {
   await transporter.sendMail({
-    from: "Dr. Rakhee Das <clinic@gmail.com>",
+    from: `Dr. Rakhee Das <${process.env.EMAIL}>`,
     to,
     subject,
     text,
