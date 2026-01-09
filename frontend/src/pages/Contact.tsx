@@ -14,6 +14,7 @@ import {
 import Layout from "@/components/layout/Layout";
 import { useToast } from "@/hooks/use-toast";
 
+// Chambers data
 const chambers = [
   {
     name: "Cheragi Pahar Square",
@@ -35,21 +36,7 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    toast({
-      title: "Appointment Request Sent!",
-      description: "We'll contact you shortly to confirm your appointment.",
-    });
-
-    setFormData({ name: "", email: "", phone: "", chamber: "", message: "" });
-    setIsSubmitting(false);
-  };
-
+  // Handle form changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -59,6 +46,43 @@ const Contact = () => {
     }));
   };
 
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.chamber) {
+      toast({ title: "Please select a chamber" });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("http://localhost:5000/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to submit appointment");
+
+      toast({
+        title: "Appointment Request Sent!",
+        description:
+          "We'll contact you shortly to confirm your appointment.",
+      });
+
+      setFormData({ name: "", email: "", phone: "", chamber: "", message: "" });
+    } catch (err) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+      });
+    }
+
+    setIsSubmitting(false);
+  };
+
+  // Handle WhatsApp click
   const handleWhatsAppClick = () => {
     const whatsappNumber = "8801815343430";
     const message = encodeURIComponent(
@@ -88,7 +112,6 @@ const Contact = () => {
       <section className="section-padding bg-background">
         <div className="container-width">
           <div className="grid lg:grid-cols-2 rounded-2xl border overflow-hidden">
-
             {/* Left */}
             <div className="p-8 bg-secondary/50 border-r">
               <h2 className="font-serif text-xl font-bold mb-6">
@@ -166,9 +189,28 @@ const Contact = () => {
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                <Input name="name" placeholder="Full Name" required onChange={handleChange} />
-                <Input name="email" type="email" placeholder="Email" required onChange={handleChange} />
-                <Input name="phone" placeholder="Phone Number" required onChange={handleChange} />
+                <Input
+                  name="name"
+                  placeholder="Full Name"
+                  required
+                  onChange={handleChange}
+                  value={formData.name}
+                />
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  required
+                  onChange={handleChange}
+                  value={formData.email}
+                />
+                <Input
+                  name="phone"
+                  placeholder="Phone Number"
+                  required
+                  onChange={handleChange}
+                  value={formData.phone}
+                />
 
                 <Select
                   value={formData.chamber}
@@ -193,6 +235,7 @@ const Contact = () => {
                   placeholder="Message (optional)"
                   rows={4}
                   onChange={handleChange}
+                  value={formData.message}
                 />
 
                 <Button
