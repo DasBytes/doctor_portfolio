@@ -8,7 +8,7 @@ import {
   Zap, 
   Star,
   CheckCircle,
-   ArrowRight,
+  ArrowRight,
   Award,
   Users,
   Clock
@@ -73,19 +73,19 @@ const Services = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-24 overflow-hidden bg-white animate-fade-up">
-        <div className="relative max-w-7xl mx-auto px-4 md:px-8 text-center">
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100 animate-fade-up">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden bg-white animate-fade-up">
+        <div className="relative max-w-3xl sm:max-w-7xl mx-auto px-4 sm:px-8 text-center">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-50 text-blue-700 rounded-full text-xs sm:text-sm font-medium border border-blue-100 animate-fade-up">
               Our Services
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-800 leading-tight animate-fade-up delay-100">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-slate-800 leading-tight animate-fade-up delay-100">
               Comprehensive
               <span className="block bg-gradient-to-r from-amber-400 to-pink-400 bg-clip-text text-transparent">
                 Dental Care
               </span>
             </h1>
-            <p className="text-slate-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed animate-fade-up delay-200">
+            <p className="text-slate-600 text-sm sm:text-lg md:text-xl max-w-xl sm:max-w-3xl mx-auto leading-relaxed animate-fade-up delay-200">
               From routine checkups to advanced treatments, we offer a complete range of dental 
               services to keep your smile healthy and beautiful.
             </p>
@@ -94,8 +94,8 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="relative -mt-16 pb-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="relative -mt-12 sm:-mt-16 pb-12 sm:pb-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <div
               key={service.title}
@@ -105,63 +105,63 @@ const Services = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${service.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-              <div className="relative p-8">
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}>
-                  <service.icon className="w-10 h-10 text-white" />
+              <div className="relative p-6 sm:p-8">
+                <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 sm:mb-6 shadow-lg transform group-hover:scale-105 group-hover:rotate-3 transition-transform duration-500`}>
+                  <service.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-800 mb-4 group-hover:text-blue-700 transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2 sm:mb-4 group-hover:text-blue-700 transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                   {service.description}
                 </p>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {service.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-sm">
-                      <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                    <li key={feature} className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 shrink-0 mt-0.5" />
                       <span className="text-slate-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.color} opacity-5 rounded-bl-full`}></div>
+              <div className={`absolute top-0 right-0 w-20 sm:w-32 h-20 sm:h-32 bg-gradient-to-br ${service.color} opacity-5 rounded-bl-full`}></div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-white animate-fade-up delay-100">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-4 animate-fade-up">
-              <Award className="w-4 h-4" />
+      <section className="py-16 sm:py-20 bg-white animate-fade-up delay-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="text-center mb-12 sm:mb-16">
+            <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-50 text-blue-700 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4 animate-fade-up">
+              <Award className="w-3 sm:w-4 h-3 sm:h-4" />
               Why Choose Us
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4 animate-fade-up delay-100">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-2 sm:mb-4 animate-fade-up delay-100">
               Quality Care You Can Trust
             </h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto animate-fade-up delay-200">
+            <p className="text-slate-600 text-sm sm:text-lg max-w-md sm:max-w-2xl mx-auto animate-fade-up delay-200">
               Experience dental care that combines expertise, technology, and compassion
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
             {[ 
               { title: "Modern Equipment", desc: "Latest dental technology for precise treatments", icon: Sparkles, gradient: "from-blue-500 to-cyan-500" },
               { title: "Gentle Approach", desc: "Comfortable, anxiety-free dental experience", icon: Heart, gradient: "from-pink-500 to-rose-500" },
               { title: "Personalized Care", desc: "Treatment plans tailored to your needs", icon: Users, gradient: "from-purple-500 to-violet-500" },
               { title: "Affordable Pricing", desc: "Quality dental care at reasonable rates", icon: Shield, gradient: "from-emerald-500 to-teal-500" },
             ].map((item, idx) => (
-              <div key={item.title} className="group relative bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 border border-slate-200 hover:border-transparent overflow-hidden animate-fade-up" style={{ animationDelay: `${idx * 100}ms` }}>
+              <div key={item.title} className="group relative bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-6 sm:p-8 hover:shadow-2xl transition-all duration-500 border border-slate-200 hover:border-transparent overflow-hidden animate-fade-up" style={{ animationDelay: `${idx * 100}ms` }}>
                 <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
                 <div className="relative">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-                    <item.icon className="w-8 h-8 text-white" />
+                  <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-4 sm:mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                    <item.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                   </div>
-                  <h4 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-700 transition-colors">{item.title}</h4>
-                  <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+                  <h4 className="text-lg sm:text-xl font-bold text-slate-800 mb-2 sm:mb-3 group-hover:text-blue-700 transition-colors">{item.title}</h4>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
                 </div>
-                <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-slate-200 rounded-full opacity-20 group-hover:scale-150 transition-transform duration-700"></div>
+                <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-slate-200 rounded-full opacity-20 group-hover:scale-150 transition-transform duration-700"></div>
               </div>
             ))}
           </div>
@@ -170,29 +170,31 @@ const Services = () => {
 
       {/* CTA */}
       <section className="dental-gradient section-padding animate-fade-up">
-        <div className="container-width text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary-foreground mb-4 animate-fade-up">
+        <div className="container-width text-center space-y-4 sm:space-y-6">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-primary-foreground animate-fade-up">
             Need a Dental Consultation?
           </h2>
-          <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto animate-fade-up delay-100">
+          <p className="text-primary-foreground/80 text-sm sm:text-lg md:text-lg max-w-md sm:max-w-2xl mx-auto animate-fade-up delay-100">
             Book an appointment today and let's discuss the best treatment plan for your smile.
           </p>
-          <Button variant="heroOutline" size="xl" asChild className="animate-fade-up delay-200">
-            <Link to="/contact">
-              Book Appointment
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <Button variant="heroOutline" size="xl" asChild className="animate-fade-up delay-200">
+              <Link to="/contact">
+                Book Appointment
+              </Link>
+            </Button>
             <Button 
               variant="ghost" 
               size="xl" 
-              className="text-primary-foreground hover:bg-primary-foreground/10"
+              className="text-primary-foreground hover:bg-primary-foreground/10 animate-fade-up delay-300"
               asChild
             >
-              <Link to="/about">
+              <Link to="/about" className="flex items-center gap-2 justify-center">
                 About Dr. Rakhee
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>
+          </div>
         </div>
       </section>
     </Layout>
